@@ -12,6 +12,6 @@ class Fornecedor extends Model
     use SoftDeletes;
     
     protected $table = 'fornecedores';
-    //através do fillable autoriza que o método estático create preenchesse esses atributos no objeto
+    //através do fillable autoriza que o método estático create preencha esses atributos no objeto
     protected $fillable = ['nome', 'site', 'uf', 'email'];
 }

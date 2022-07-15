@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        //Adicionando uma coluna após 
+        //Adicionando uma coluna chamada site após a coluna nome
         Schema::table('fornecedores', function (Blueprint $table) {
             $table->string('site', 150)->after('nome')->nullable(); 
         });

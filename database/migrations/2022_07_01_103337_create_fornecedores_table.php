@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('fornecedores', function (Blueprint $table) {
             $table->id();
             $table->string('nome', 50);
-            $table->timestamps();
+            $table->timestamps(); //criou as colunas created_at e updated_at
             //$table->softDeletes();
         });
     }
@@ -28,7 +28,7 @@ return new class extends Migration
      */
     public function down()
     {   
-        //remove um schema (tabela) caso essa tabela exista
+        //remove um schema (tabela) caso essa tabela exista, ele faz um teste prévio
         Schema::dropIfExists('fornecedores');
         //remove sem fazer um teste prévio
         //Schema::drop('fornecedores');

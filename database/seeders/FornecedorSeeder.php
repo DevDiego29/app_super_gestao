@@ -15,6 +15,7 @@ class FornecedorSeeder extends Seeder
      */
     public function run()
     {
+        //métodos para inserção de registros no banco:
         //adicionando instruções-instanciando objetos
         $fornecedor = new Fornecedor();
         $fornecedor->nome = 'Fornecedor 100';

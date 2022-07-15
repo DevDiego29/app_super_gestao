@@ -19,7 +19,7 @@ class SiteContatoFactory extends Factory
         return [
             'nome' => $this-> faker->name,
             'telefone' => $this-> faker->tollFreePhoneNumber,
-            'email' => $this-> faker->unique()->email,
+            'email' => $this-> faker->unique()->email, //email não pode se repetir
             'motivo_contato' => $this-> faker->numberBetween(1,3),
             'mensagem' => $this-> faker->text(200)
         ];

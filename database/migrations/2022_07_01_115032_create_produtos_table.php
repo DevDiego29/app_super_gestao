@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('produtos', function (Blueprint $table) {
             $table->id();
             $table->string('nome', 100);
-            $table->text('descricao')->nullable();
+            $table->text('descricao')->nullable(); //no momento da inserção eu não preciso passar nenhuma descrição para que o registro seja inserido
             $table->integer('peso')->nullable();
             $table->float('preco_venda', 8, 2)->default(0.01);
             $table->integer('estoque_minimo')->default(1);
