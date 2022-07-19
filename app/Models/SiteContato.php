@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model; //inclusão da classe model
 class SiteContato extends Model //declarando uma classe extendendo a classe Model
 {
     use HasFactory;
-    protected $fillable = ['nome', 'telefone', 'email', 'motivo_contato', 'mensagem'];
+    protected $fillable = ['nome', 'telefone', 'email', 'motivo_contatos_id', 'mensagem'];
 }
