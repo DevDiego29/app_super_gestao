@@ -16,8 +16,9 @@ class ContatoController extends Controller
     }
 
     public function salvar(Request $request) {
+        //Regras de validação dos campos
         $regras =             [
-            'nome' => 'required|min:3|max:40|unique:site_contatos',
+            'nome' => 'required|min:3|max:40|unique:site_contatos', //unique:parâmetro(nome tabela)
             'telefone' => 'required',
             'email' => 'email',
             'motivo_contatos_id' => 'required',
@@ -25,7 +26,7 @@ class ContatoController extends Controller
         ];
 
         $feedback = [
-            'nome.min' => 'O campo nome precisa ter no mínimo 3 caracteres',
+            'nome.min' => 'O campo nome precisa ter no mínimo 3 caracteres', //campo.validação => 'mensagem que exibirá'
             'nome.max' => 'O campo nome deve ter no máximo 40 caracteres',
             'nome.unique' => 'O nome informado já está em uso',
 
@@ -38,7 +39,7 @@ class ContatoController extends Controller
 
         $request->validate($regras, $feedback);
 
-        SiteContato::create($request->all());
-        return redirect()->route('site.index');
+        SiteContato::create($request->all()); //persistência dos dados no banco
+        return redirect()->route('site.index'); //Redireciona para a rota principal
     }
 }

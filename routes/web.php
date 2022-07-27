@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 // Rotas públicas:
 
-Route::get('/',[\App\Http\Controllers\PrincipalController::class,'principal'])->name('site.index');
+Route::get('/',[\App\Http\Controllers\PrincipalController::class,'principal'])->name('site.index')->middleware('log.acesso');
 
 Route::get('/sobreNos',[\App\Http\Controllers\SobreNosController::class,'sobreNos'])->name('site.sobreNos');
 
@@ -23,30 +23,26 @@ Route::get('/contato',[\App\Http\Controllers\ContatoController::class,'contato']
 
 Route::post('/contato',[\App\Http\Controllers\ContatoController::class,'salvar'])->name('site.contato');
 
-Route::get('/login', function(){ return 'Login'; })->name('site.login');
+Route::get('/login/{erro?}', [\App\Http\Controllers\LoginController::class,'index'])->name('site.login');
+
+Route::post('/login', [\App\Http\Controllers\LoginController::class,'autenticar'])->name('site.login');
 
 // Rotas privadas/restritas:
 
-Route::prefix('/app')->group(function() {
+Route::middleware('autenticacao:padrao, visitante')->prefix('/app')->group(function() {
 
-    Route::get('/clientes', function(){return 'Clientes'; })->name('app.clientes');
+    Route::get('/home',[\App\Http\Controllers\HomeController::class,'index'] )->name('app.home');
 
-    Route::get('/fornecedores',[\App\Http\Controllers\FornecedorController::class,'fornecedores'])->name('app.fornecedores');
+    Route::get('/sair', [\App\Http\Controllers\LoginController::class,'sair'] )->name('app.sair');
 
-    Route::get('/produtos', function(){return 'produtos'; })->name('app.produtos');
+    Route::get('/cliente', [\App\Http\Controllers\ClienteController::class,'index'])->name('app.cliente');
+
+    Route::get('/fornecedor',[\App\Http\Controllers\FornecedorController::class,'index'])->name('app.fornecedor');
+
+    Route::get('/produto', [\App\Http\Controllers\ProdutoController::class,'index'])->name('app.produto');
 });
 
-/**Redirecionamento de rotas:
-
-Route::get('/rota1', function() {
-    echo 'Rota 1';
-})->name('site.rota1');
-
-Route::get('/rota2', function() {
-    return redirect()->route('site.rota1');
-})->name('site.rota2');**/
-
-//outra maneira de redirecionar rotas - Route:redirect('/rota2', '/rota1');
+//Redirecionamento de rotas:
 
 Route::get('/teste/{p1}/{p2}',[\App\Http\Controllers\TesteController::class,'teste'])->name('teste');
 
@@ -55,5 +51,3 @@ Route::get('/teste/{p1}/{p2}',[\App\Http\Controllers\TesteController::class,'tes
 Route::fallback(function() {
     echo 'A rota acessada não existe. <a href="'.route('site.index').'">clique aqui</a> para ir a página inicial';
 });
-
-
