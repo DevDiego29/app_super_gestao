@@ -24,8 +24,13 @@
                         <tr>
                             <th>Nome</th>
                             <th>Descrição</th>
+                            <th>Nome do Fornecedor</th>
+                            <th>Site do Fornecedor</th>
                             <th>Peso</th>
                             <th>Unidade ID</th>
+                            <th>Comprimento</th>
+                            <th>Altura</th>
+                            <th>Largura</th>
                             <th></th>
                             <th></th>
                             <th></th>
@@ -37,8 +42,13 @@
                             <tr>
                                 <td>{{ $produto->nome }}</td>
                                 <td>{{ $produto->descricao }}</td>
+                                <td>{{ $produto->fornecedor->nome }}</td>
+                                <td>{{ $produto->fornecedor->site }}</td>
                                 <td>{{ $produto->peso }}</td>
                                 <td>{{ $produto->unidade_id }}</td>
+                                <td>{{ $produto->ItemDetalhe->comprimento ?? '' }}</td>
+                                <td>{{ $produto->ItemDetalhe->altura ?? '' }}</td>
+                                <td>{{ $produto->ItemDetalhe->largura ?? '' }}</td>
                                 <td><a href="{{ route('produto.show', ['produto' => $produto->id ]) }}">Vizualizar</a></td>
                                 <td>
                                     <form id="form_{{$produto->id}}" method="post" action="{{ route('produto.destroy', ['produto' => $produto->id ]) }}">
